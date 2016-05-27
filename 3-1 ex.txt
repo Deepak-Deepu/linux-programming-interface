@@ -1,0 +1,33 @@
+When using the Linux-specific reboot() system call to reboot the system, the second
+argument, magic2, must be specified as one of a set of magic numbers (e.g.,
+LINUX_REBOOT_MAGIC2 ). What is the significance of these numbers? (Converting them
+to hexadecimal provides a clue.)?
+
+soln)
+
+ #ifndef _LINUX_REBOOT_H
+   #define _LINUX_REBOOT_H
+   
+   /*
+    * Magic values required to use _reboot() system call.
+    */
+  
+  #define LINUX_REBOOT_MAGIC1     0xfee1dead
+  #define LINUX_REBOOT_MAGIC2     672274793
+  #define LINUX_REBOOT_MAGIC2A    85072278
+  #define LINUX_REBOOT_MAGIC2B    369367448
+  #define LINUX_REBOOT_MAGIC2C    537993216
+
+
+
+/* Converting in to
+to hexadecimal */
+
+672274793 = 0x28121969
+ 85072278 = 0x05121996
+369367448 = 0x16041998
+537993216 = 0x20112000
+
+Developers' or developers' children's birthdays
+
+Basically, a bit flip in an address can cause a program to think it is calling one system call when, in fact, it's calling the reboot() system call. Because reboot() is a very destructive, non-syncing operation that erases the state of the system -- thus erasing the evidence of the bit-flip problem that would otherwise be exposed as a program error or panic -- Linux includes extra protections around its successful use
