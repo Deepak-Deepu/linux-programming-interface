@@ -1,0 +1,3 @@
+Compile the program in Listing 6-1 (mem_segments.c), and list its size using ls -l. Although the program contains an array (mbuf) that is around 10 MB in size, the executable file is much smaller than this. Why is this?
+
+soln) 'ls -l' just shows the size of the stored artifacts for a program that are stored on disk, not what actually gets put into memory. The items from the text area of the program will likely all be present, but not storage for memory that will be allocated in the other parts of the process (not program) when loaded into memory. In this case, the static buffer will be located in the "uninitialized data segment" of the process memory map.
